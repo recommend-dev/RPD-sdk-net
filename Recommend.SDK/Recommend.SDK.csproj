@@ -2,10 +2,18 @@
 
   <PropertyGroup>
     <TargetFrameworks>net48;netstandard2.0</TargetFrameworks>
-    <PackageId>RecommendInc.SDK</PackageId>
-    <Version>1.0.0</Version>
-    <Authors>Recommend, Inc.</Authors>
-    <Company>Recommend, Inc.</Company>
+    <PackageId>Recommend.SDK</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>Recommend Inc.</Authors>
+    <Company>Recommend Inc.</Company>
+    <PackageLicenseExpression>(LGPL-2.0-only WITH FLTK-exception OR Apache-2.0+)</PackageLicenseExpression>
+    <Title>Recommend API SDK</Title>
+    <Description>Recommend API integration package</Description>
+    <Summary>Package used for integration with Recommend, Inc. platform</Summary>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://about.recommend.co/api-docs/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/recommend-dev/RPD-net-sdk.git</RepositoryUrl>
+    <PackageTags>recommend;rpd;recommendinc</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
