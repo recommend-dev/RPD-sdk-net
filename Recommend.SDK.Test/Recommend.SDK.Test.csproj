@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Recommend.SDK">
-      <HintPath>..\Recommend.SDK\bin\Debug\netstandard2.0\Recommend.SDK.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Recommend.SDK" Version="1.0.1" />
   </ItemGroup>
 
 </Project>
