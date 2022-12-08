@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net48;netstandard2.0</TargetFrameworks>
     <PackageId>Recommend.SDK</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1</Version>
     <Authors>Recommend Inc.</Authors>
     <Company>Recommend Inc.</Company>
     <PackageLicenseExpression>(LGPL-2.0-only WITH FLTK-exception OR Apache-2.0+)</PackageLicenseExpression>
@@ -14,10 +14,12 @@
     <PackageProjectUrl>https://about.recommend.co/api-docs/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/recommend-dev/RPD-net-sdk.git</RepositoryUrl>
     <PackageTags>recommend;rpd;recommendinc</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

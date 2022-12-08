@@ -8,5 +8,7 @@ namespace Recommend.SDK.Model
         public string apiToken { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
+        public string orderNumber { get; set; }
+        public string cartTotal { get; set; }
     }
 }

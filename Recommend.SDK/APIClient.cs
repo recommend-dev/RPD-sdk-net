@@ -21,7 +21,7 @@ namespace Recommend.SDK
         /// <param name="baseUrl">Recommend API URL, uses default production URL</param>
         /// <param name="throwExceptions">Throw exception on error, off by default</param>
         /// </summary>
-        public APIClient(string apiKey, string baseUrl = "https://api.recommend.co/apikeys", bool throwExceptions = false)
+        public APIClient(string apiKey, string baseUrl = "https://api.recommend.co/apikeys/", bool throwExceptions = false)
         {
             if (string.IsNullOrEmpty(apiKey))
             {
@@ -73,8 +73,10 @@ namespace Recommend.SDK
         /// <param name="code">Referral code (rcmndref)</param>
         /// <param name="email">Customer email (optional)</param>
         /// <param name="phone">Customer phone (optional)</param>
+        /// <param name="orderNumber">Order number (optional)</param>
+        /// <param name="cartTotal">Cart total amount (optional)</param>
         /// <returns>ApiKeyResponse with status code</returns>
-        public async Task<ApiKeyResponse> ReferralCheck(string code, string email = "", string phone = "")
+        public async Task<ApiKeyResponse> ReferralCheck(string code, string email = "", string phone = "", string orderNumber = "", string cartTotal = "")
         {
             if (string.IsNullOrEmpty(code)) throw new ArgumentException("Code cannot be empty");
 
@@ -85,10 +87,108 @@ namespace Recommend.SDK
                     apiToken = this.ApiKey,
                     code = code,
                     email = email,
-                    phone = phone
+                    phone = phone,
+                    orderNumber = orderNumber,
+                    cartTotal = cartTotal
                 };
 
                 var result = await HttpClient.PostAsJsonAsync("", request);
+                if (result != null && result.IsSuccessStatusCode)
+                {
+                    var responseData = await result.Content.ReadAsStringAsync();
+                    return System.Text.Json.JsonSerializer.Deserialize<ApiKeyResponse>(responseData);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ThrowExceptions) throw ex;
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Approve single conversion
+        /// </summary>
+        /// <param name="conversionId">Conversion ID received from ReferralCheck</param>
+        public async Task<ApiKeyResponse> ApproveConversion(int conversionId)
+        {
+            try
+            {
+                var request = new ConversionDTO()
+                {
+                    ApiKey = this.ApiKey,
+                    ConversionId = conversionId
+                };
+
+                var result = await HttpClient.PostAsJsonAsync("approve", request);
+                if (result != null && result.IsSuccessStatusCode)
+                {
+                    var responseData = await result.Content.ReadAsStringAsync();
+                    return System.Text.Json.JsonSerializer.Deserialize<ApiKeyResponse>(responseData);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ThrowExceptions) throw ex;
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Reject single conversion
+        /// </summary>
+        /// <param name="conversionId">Conversion ID received from ReferralCheck</param>
+        public async Task<ApiKeyResponse> RejectConversion(int conversionId)
+        {
+            try
+            {
+                var request = new ConversionDTO()
+                {
+                    ApiKey = this.ApiKey,
+                    ConversionId = conversionId
+                };
+
+                var result = await HttpClient.PostAsJsonAsync("reject", request);
+                if (result != null && result.IsSuccessStatusCode)
+                {
+                    var responseData = await result.Content.ReadAsStringAsync();
+                    return System.Text.Json.JsonSerializer.Deserialize<ApiKeyResponse>(responseData);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ThrowExceptions) throw ex;
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets conversion status
+        /// </summary>
+        /// <param name="conversionId">Conversion ID received from ReferralCheck</param>
+        public async Task<ApiKeyResponse> GetConversionStatus(int conversionId)
+        {
+            try
+            {
+                var request = new ConversionDTO()
+                {
+                    ApiKey = this.ApiKey,
+                    ConversionId = conversionId
+                };
+
+                var result = await HttpClient.PostAsJsonAsync("GetConversionStatus", request);
                 if (result != null && result.IsSuccessStatusCode)
                 {
                     var responseData = await result.Content.ReadAsStringAsync();
