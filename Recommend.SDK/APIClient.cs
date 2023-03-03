@@ -75,8 +75,9 @@ namespace Recommend.SDK
         /// <param name="phone">Customer phone (optional)</param>
         /// <param name="orderNumber">Order number (optional)</param>
         /// <param name="cartTotal">Cart total amount (optional)</param>
+        /// <param name="ssnid">Session ID used for bounce rate tracking (optional)</param>
         /// <returns>ApiKeyResponse with status code</returns>
-        public async Task<ApiKeyResponse> ReferralCheck(string code, string email = "", string phone = "", string orderNumber = "", string cartTotal = "")
+        public async Task<ApiKeyResponse> ReferralCheck(string code, string email = "", string phone = "", string orderNumber = "", string cartTotal = "", string ssnid = "")
         {
             if (string.IsNullOrEmpty(code)) throw new ArgumentException("Code cannot be empty");
 
@@ -89,7 +90,8 @@ namespace Recommend.SDK
                     email = email,
                     phone = phone,
                     orderNumber = orderNumber,
-                    cartTotal = cartTotal
+                    cartTotal = cartTotal,
+                    ssnid = ssnid
                 };
 
                 var result = await HttpClient.PostAsJsonAsync("", request);

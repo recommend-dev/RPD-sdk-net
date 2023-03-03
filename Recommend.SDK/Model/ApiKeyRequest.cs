@@ -10,5 +10,6 @@ namespace Recommend.SDK.Model
         public string email { get; set; }
         public string orderNumber { get; set; }
         public string cartTotal { get; set; }
+        public string ssnid { get; set; }
     }
 }
